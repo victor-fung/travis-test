@@ -25,4 +25,5 @@ install:
   - chmod 444 "sites/default/settings.php"
 before_install:
   - composer global require drush/drush:8.*
+  - ln -s ~/.composer/vendor/drush/drush/drush /usr/bin/drush
   - composer install
