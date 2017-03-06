@@ -1,0 +1,28 @@
+language: php
+env:
+  - DB_NAME=project_db
+  - DB_USER=user
+  - DB_PASSWORD=password
+  - DB_PORT=3306
+  - DB_ENCODE=utf8mb4_general_ci
+php:
+  - 7.0
+  - hhvm
+mysql:
+  database: $DB_NAME
+  username: $DB_USER
+  password: $DB_PASSWORD
+  encoding: $DB_ENCODE
+script:
+  - php core/scripts/run-tests.sh
+services:
+  - mysql
+install:
+  - cp sites/settings.travis.php sites/default/settings.travis.php
+  - chmod 444 sites/default/settings.travis.php
+  - chmod 777 "sites/default/settings.php"
+  - drush si standard --account-name=admin --account-pass=password --account-mail=admin@example.com --site-mail=admin@example.com --site-name='Drupal 8' -y && drush cr
+  - chmod 444 "sites/default/settings.php"
+before_install:
+  - composer global require drush/drush:8.*
+  - composer install
