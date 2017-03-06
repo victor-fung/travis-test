@@ -1,13 +1,13 @@
 language: php
+php:
+  - 7.0
+  - hhvm
 env:
   - DB_NAME=project_db
   - DB_USER=user
   - DB_PASSWORD=password
   - DB_PORT=3306
   - DB_ENCODE=utf8mb4_general_ci
-php:
-  - 7.0
-  - hhvm
 mysql:
   database: $DB_NAME
   username: $DB_USER
