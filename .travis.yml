@@ -1,29 +1,14 @@
-language: php
-php:
-  - 7.0
-  - hhvm
-env:
-  - DB_NAME=project_db
-  - DB_USER=user
-  - DB_PASSWORD=password
-  - DB_PORT=3306
-  - DB_ENCODE=utf8mb4_general_ci
-mysql:
-  database: $DB_NAME
-  username: $DB_USER
-  password: $DB_PASSWORD
-  encoding: $DB_ENCODE
+sudo: required
+services:
+  - docker
+before_install:
+  - docker-compose pull
+  - docker-compose up -d
+  - ./scripts/install-dependencies.sh
+  - cp sites/settings.travis.php sites/default/settings.travis.php
+install:
+  - ./scripts/site-install.sh
+after_install:
+  - ./scripts/ssh.sh
 script:
   - php core/scripts/run-tests.sh
-services:
-  - mysql
-install:
-  - cp sites/settings.travis.php sites/default/settings.travis.php
-  - chmod 444 sites/default/settings.travis.php
-  - chmod 777 "sites/default/settings.php"
-  - drush si standard --account-name=admin --account-pass=password --account-mail=admin@example.com --site-mail=admin@example.com --site-name='Drupal 8' -y && drush cr
-  - chmod 444 "sites/default/settings.php"
-before_install:
-  - composer global require drush/drush:8.*
-  - sudo ln -s ~/.composer/vendor/drush/drush/drush /usr/bin/drush
-  - composer install

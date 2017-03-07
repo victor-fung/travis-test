@@ -8,17 +8,19 @@
 /**
  * Database settings.
  */
-$databases = [
-  'default' => [
-    'default' => [
-      'database' => $_SERVER['DB_NAME'],
-      'username' => $_SERVER['DB_USER'],
-      'password' => $_SERVER['DB_PASSWORD'],
-      'prefix' => '',
-      'host' => '127.0.0.1',
-      'port' => $_SERVER['DB_PORT'],
-      'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-      'driver' => 'mysql',
-    ],
-  ],
-];
+ $databases = [
+   'default' => [
+     'default' => [
+       'database' => 'project_db',
+       'username' => 'user',
+       'password' => 'password',
+       'prefix' => '',
+       'host' => 'tc_d8_db_container',
+       'port' => '3306',
+       'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+       'driver' => 'mysql',
+     ],
+   ],
+ ];
+
+$settings['hash_salt'] = '4kngernjkgriugeregrubgebejjn';
