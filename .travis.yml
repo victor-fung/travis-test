@@ -3,6 +3,7 @@ services:
 before_install:
   - docker-compose pull
   - docker-compose up -d
+  - rm composer.lock
   - ./scripts/install-dependencies.sh
   - cp sites/settings.travis.php sites/default/settings.travis.php
 install:
